@@ -77,8 +77,7 @@ debugSize = .-debugString
 
 // Some data values to view
 byteArray:    
-    .byte   0x1, 0x2, 0x3, 0x4, 0x5  // Array or doublewords
-
+    .byte   0x1, 0x2, 0x3, 0x4, 0x5  // Array of bytes
 
 .text  // start o the text segment (Code)
 
