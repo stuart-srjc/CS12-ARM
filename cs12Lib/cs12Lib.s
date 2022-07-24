@@ -143,6 +143,52 @@ printReg x14
 //~~~
 printR15:
 printReg x15
+//~~~
+printR6:
+printReg x16
+//~~~
+printR7:
+printReg x17
+//~~~
+printR8:
+printReg x18
+//~~~
+printR9:
+printReg x19
+//~~~
+printR10:
+printReg x20
+//~~~
+printR1:
+printReg x21
+//~~~
+printR2:
+printReg x22
+//~~~
+printR3:
+printReg x23
+//~~~
+printR4:
+printReg x24
+//~~~
+printR5:
+printReg x25
+//~~~
+printR6:
+printReg x26
+//~~~
+printR7:
+printReg x27
+//~~~
+printR8:
+printReg x28
+//~~~
+printR9:
+printReg x29
+//~~~
+printR10:
+printReg x30
+
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //print Register pointed to by R0
