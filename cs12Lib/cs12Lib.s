@@ -54,27 +54,116 @@ tempPtr: .word tempBytes
 .global exitNormal 
 .global getRandomNumber
 .global divide
-.global printR0
-.global printR1
-.global printR2
-.global printR3
-.global printR4
-.global printR5
-.global printR6
-.global printR7
-.global printR8
-.global printR9
-.global printR10
-.global printR11
-.global printR12
-.global printR13
-.global printR14
-.global printR15
+.global printX0
+.global printX1
+.global printX2
+.global printX3
+.global printX4
+.global printX5
+.global printX6
+.global printX7
+.global printX8
+.global printX9
+.global printX10
+.global printX11
+.global printX12
+.global printX13
+.global printX14
+.global printX15
+.global printX16
+.global printX17
+.global printX18
+.global printX19
+.global printX20
+.global printX21
+.global printX22
+.global printX23
+.global printX24
+.global printX25
+.global printX26
+.global printX27
+.global printX28
+.global printX29
+.global printX30
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//push General Purpose Registers
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.macro pushGP
+push x0
+push x1
+push x2
+push x3
+push x4
+push x5
+push x6
+push x7
+push x8
+push x9
+push x10
+push x11
+push x12
+push x13
+push x14
+push x15
+push x16
+push x17
+push x18
+push x19
+push x20
+push x21
+push x22
+push x23
+push x24
+push x25
+push x26
+push x27
+push x28
+push x29
+.endm
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//pop General Purpose Registers
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.macro popGP
+pop x29
+pop x28
+pop x27
+pop x26
+pop x25
+pop x24
+pop x23
+pop x22
+pop x21
+pop x20
+pop x19
+pop x18
+pop x17
+pop x16
+pop x15
+pop x14
+pop x13
+pop x12
+pop x11
+pop x10
+pop x9
+pop x8
+pop x7
+pop x6
+pop x5
+pop x4
+pop x3
+pop x2
+pop x1
+pop x0
+.endm
+
+
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //print Register 0
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-printRx:
+printXx:
 //prologue
 push x0
 push x11
@@ -92,101 +181,100 @@ pop x0
 ret
 
 
-
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //print Register Macros
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-printR0:
+printX0:
 printReg x0
 //~~~
-printR1:
+printX1:
 printReg x1
 //~~~
-printR2:
+printX2:
 printReg x2
 //~~~
-printR3:
+printX3:
 printReg x3
 //~~~
-printR4:
+printX4:
 printReg x4
 //~~~
-printR5:
+printX5:
 printReg x5
 //~~~
-printR6:
+printX6:
 printReg x6
 //~~~
-printR7:
+printX7:
 printReg x7
 //~~~
-printR8:
+printX8:
 printReg x8
 //~~~
-printR9:
+printX9:
 printReg x9
 //~~~
-printR10:
+printX10:
 printReg x10
 //~~~
-printR11:
+printX11:
 printReg x11
 //~~~
-printR12:
+printX12:
 printReg x12
 //~~~
-printR13:
+printX13:
 printReg x13
 //~~~
-printR14:
+printX14:
 printReg x14
 //~~~
-printR15:
+printX15:
 printReg x15
 //~~~
-printR6:
+printX16:
 printReg x16
 //~~~
-printR7:
+printX17:
 printReg x17
 //~~~
-printR8:
+printX18:
 printReg x18
 //~~~
-printR9:
+printX19:
 printReg x19
 //~~~
-printR10:
+printX20:
 printReg x20
 //~~~
-printR1:
+printX21:
 printReg x21
 //~~~
-printR2:
+printX22:
 printReg x22
 //~~~
-printR3:
+printX23:
 printReg x23
 //~~~
-printR4:
+printX24:
 printReg x24
 //~~~
-printR5:
+printX25:
 printReg x25
 //~~~
-printR6:
+printX26:
 printReg x26
 //~~~
-printR7:
+printX27:
 printReg x27
 //~~~
-printR8:
+printX28:
 printReg x28
 //~~~
-printR9:
+printX29:
 printReg x29
 //~~~
-printR10:
+printX30:
 printReg x30
 
 
@@ -195,12 +283,7 @@ printReg x30
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 printRegister:
 //prologue
-push x0
-push x1
-push x2
-push x3
-push x4
-push x11
+pushGP
 push lr
 
 add x11, sp, #0
@@ -247,12 +330,7 @@ bl printString
 //epilog
 sub sp, x11, #0
 pop lr
-pop x11
-pop x4
-pop x3
-pop x2
-pop x1
-pop x0
+popGP
 ret
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

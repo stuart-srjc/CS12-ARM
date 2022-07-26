@@ -10,7 +10,7 @@ rand: .ascii "\nTesting Random Number!\n"
 randSize = .-rand
 randMax: .word 100
 
-reg: .ascii "\nTesting printRx functions!\n"
+reg: .ascii "\nTesting printXx functions!\n"
 regSize = .-reg
 
 div: .ascii "\nTesting division!\n"
@@ -34,22 +34,22 @@ mov x0, #0xabc
 lsl x0, x0, #16
 mov x1, #0xabc1
 mov x2, #0xabc2
-bl printR0
-bl printR1
-bl printR2
-bl printR3
-bl printR4
-bl printR5
-bl printR6
-bl printR7
-bl printR8
-bl printR9
-bl printR10
-bl printR11
-bl printR12
-bl printR13
-bl printR14
-bl printR15 
+bl printX0
+bl printX1
+bl printX2
+bl printX3
+bl printX4
+bl printX5
+bl printX6
+bl printX7
+bl printX8
+bl printX9
+bl printX10
+bl printX11
+bl printX12
+bl printX13
+bl printX14
+bl printX15 
 
 //test RandomNumber
 ldr x1, =rand
@@ -59,11 +59,11 @@ bl printString
 ldr x1, randMaxAddr
 mov x0, #1000
 bl getRandomNumber
-bl printR0
+bl printX0
 
 mov x0, #100
 bl getRandomNumber
-bl printR0
+bl printX0
 
 //test getString
 //test printString
