@@ -26,6 +26,7 @@ randNumAddr: .word randMax
 
 _start:
 
+/*
 //test print register
 ldr x1, =reg
 ldr x2, =regSize
@@ -79,6 +80,8 @@ ldr x1, =input
 mov x2, x0
 bl printString
 
+*/
+
 //test getNumber
 ldr x1, =greet
 ldr x2, =greetSize
@@ -86,7 +89,8 @@ bl printString
 
 //ldr x1, =input
 //ldr x2, =inputSize
-//bl getHexNumber
+bl getHexNumber
+bl printX0
 // not yet implemented
 
 //ldr x1, =input
@@ -103,7 +107,6 @@ bl printString
 //ldr x1, =greet
 //ldr x2, =greetSize
 //bl printString
-
 
 
 //bl exit 

@@ -6,6 +6,8 @@ hex: .ascii "0x"
 hexSize = .-hex
 tempBytes: .word 0x0
 
+.bss
+hexNumber: .skip 19
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //push Register Macro 
@@ -90,7 +92,6 @@ tempPtr: .word tempBytes
 //push General Purpose Registers
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .macro pushGP
-push x0
 push x1
 push x2
 push x3
@@ -155,7 +156,6 @@ pop x4
 pop x3
 pop x2
 pop x1
-pop x0
 .endm
 
 
@@ -410,7 +410,7 @@ add x11, sp, #0
 
 //body
 mov x0, #1 	// stdin
-mov x8, #64 	// write syscall
+mov x8, #63 	// read syscall
 svc #0 		// software interupt
 
 //epilog
@@ -420,23 +420,99 @@ pop x11
 ret
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// inputs R2 characters from the keyboard placing them in R1 
+// inputs 16 characters from the keyboard 
+// converts to hex and puts it in R1
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 getHexNumber:
 //prologue
-push x11
+push x1
+push x2     // used to get 18 chars, then used to store the bytes as we convert
+push x4     // Counter to track the next location in the array
+push x5     // Counter 
+push x8     // Counter 
+push x11  
 push lr
 add x11, sp, #0
 
 //body
+ldr x1, =hexNumber
+mov x2, #18 // get up to 18 characters from the input
 mov x0, #1 	// stdin
-mov x8, #64 	// write syscall
+mov x8, #63	// read syscall
 svc #0 		// software interupt
+
+// initialize the variables
+mov x4, #-1     // -1 so we can start with 0 at the first increment
+mov x5, #0
+add x5, x0, #2  // add 2 so we can do the increment/decement at the top of the loop
+mov x0, #0      // start with nothing in the register
+mov x2, #0      // start with nothing in the register
+
+nextNibble:
+sub x5, x5, #1  // decrement the count of characters, chars read +1
+add x4, x4, #1  // increment the position in the array
+
+cmp x5, 1 // go to the end we are done 
+b.le getHexNumberEnd
+
+// load the next character to store as a nibble
+ldrb w2, [x1,x4]
+
+cmp x2, #0x58   // X reset the register if the user put in 0X000
+b.ne compx
+mov x0, #0      // reset the register to 0
+b nextNibble
+
+compx:
+cmp x2, #0x78   // x reset the register if the user put in 0x000
+b.ne compEL
+mov x0, #0      // reset the register to 0
+b nextNibble
+
+compEL:
+cmp x2, #0xa    // if the line feed is found we are done
+b.eq getHexNumberEnd
+
+cmp x2, #0x61   // if this is a lowercase character
+b.hs lowerCase
+
+cmp x2, #0x41  // if this is an uppercase Chaacter
+b.hs upperCase
+
+// fall through this is a number 0-9
+sub x2, x2, #0x30  // convert nibble from ASCII to Hex 
+b storeNibble
+
+upperCase:  // convert nibble from ASCII to Hex 
+sub x2, x2, #0x37
+b storeNibble
+
+lowerCase:  // convert nibble from ASCII to Hex 
+sub x2, x2, #0x57
+b storeNibble
+
+// if we fall through jump to the end
+b getHexNumberEnd
+
+storeNibble:
+lsl x0, x0, #4  // shift the register by a nibble
+add x0, x0, x2  // add the next nibble
+//bl printX0
+b nextNibble
+
+
+getHexNumberEnd:
+
 
 //epilog
 sub sp, x11, #0
 pop lr
-push x11
+pop x11
+pop x8
+pop x5
+pop x4
+pop x2
+pop x1
 ret
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
