@@ -17,6 +17,9 @@ Equal:
 	.asciz "Your number is equal\n"
 eSize = .-Equal
 
+newLine: 
+	.quad 0xA
+
 .text  // start o the text segment (Code)
 
 .global _start // Linux Standard _start, similar to main in C/C++ 
@@ -162,22 +165,24 @@ b whileLoop     // if the user input anything but 0 jump to the top of the loop 
 endWhileLoop:
 
 // Branch With Link
-// This is like a function call we will get more into function calls in the future but for now lets write a function that asks the user for input and gets it
+// This is like a function call we will get more into function calls in the future but for now lets write a function that prints a new line
 // We will add an unconditional branch surrounding this code so that it is not run unless we call it
-b skipPromptUserInput
-promptUserInput:
+// to support this the following was added in the data section
+// newLine
+b skipNewLine
+endl:
 mov x0, #0          // stdout
-ldr x1, =flow       // store the address of flow into x1
-ldr x2, =flowSize   // store the size of the flowwWorld string into x2
+ldr x1, =newLine     // store the address of our newLine character
+mov x2, #1           // just print the one character
 mov x8, #64         // store 64 to x8, this is the linux write call
 svc 0               // Linux service call
 ret                 // return to the line after the one that called this function
 
-skipPromptUserInput:
+skipNewLine:
 
 // now we can call the code using a branch with the link
 // note that code called with BL needs a corresponding ret 
-BL promptUserInput
+BL endl 
 
 // you may have noticed that we have been using BL to call functions in the library provided for the class
 // we will learn much more about this in the future modules.
@@ -190,6 +195,7 @@ BL promptUserInput
 MOV X0, #0xAB       
 AND X0, X0, #0xF
 BL printX0          // this should produce 0x0B
+BL endl
 
 /*
 0X0F = 0000 1111
@@ -203,6 +209,7 @@ AND  = 0000 1011 = 0xB
 MOV X0, #0xAB       
 EOR X0, X0, #0xF
 BL printX0          // this should produce 0x0B
+BL endl
 
 /*
 0X0F = 0000 1111
@@ -216,6 +223,7 @@ EOR  = 1010 0100 = 0xA4
 MOV X0, #0xAB       
 ORR X0, X0, #0xF
 BL printX0          // this should produce 0x0B
+BL endl
 
 /*
 0X0F = 0000 1111
@@ -238,6 +246,7 @@ The Logic Table is this
 MOV X0, #0xAB       
 BIC X0, X0, #0xF
 BL printX0          // this should produce 0x0B
+BL endl
 
 /*
 0X0F = 0000 1111
@@ -260,18 +269,29 @@ MOV X0, #0xAAAAAAAAAAAAAAAA
 BL printX0          // for comparing the output
 LSL X0, X0, #4
 BL printX0          // this should produce 0xAAAAAAAAAAAAAA0
-
-PRINT NEW LINE ???
-
-
+BL endl
 
 // LSR   X1, X2, #1    // Logical shift right
-
+MOV X0, #0xAAAAAAAAAAAAAAAA
+BL printX0          // for comparing the output
+LSR X0, X0, #4
+BL printX0          // this should produce 0x0AAAAAAAAAAAAAA
+BL endl
 
 // ASR   X1, X2, #1    // Arithmetic shift right
+MOV X0, #0xAAAAAAAAAAAAAAAA
+BL printX0          // for comparing the output
+ASR X0, X0, #4
+BL printX0          // this should produce 0xFAAAAAAAAAAAAAA
+BL endl
 
 
 // ROR   X1, X2, #1    // Rotate right 
+MOV X0, #0xAAAAAAAAAAAAAAAA
+BL printX0          // for comparing the output
+ROR X0, X0, #4
+BL printX0          // this should produce 0xAAAAAAAAAAAAAAA
+BL endl
 
 
 
