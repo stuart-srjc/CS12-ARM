@@ -186,27 +186,92 @@ BL promptUserInput
 // The Logical Operators listed below coorespond to the Bitwise operations in C
 // AND{S}    Xd, Xs, Operand2
 // And is the same as the & operator in C
-// X0 = 0xFF & 0xAB  
-MOV X0, #0xAB
-AND X0, X0, #0xFF
-BL printX0
+// X0 = 0xF & 0xAB;  
+MOV X0, #0xAB       
+AND X0, X0, #0xF
+BL printX0          // this should produce 0x0B
 
+/*
+0X0F = 0000 1111
+0xAB = 1010 1011
+AND  = 0000 1011 = 0xB
+*/
 
 // EOR{S}    Xd, Xs, Operand2
+// This is the Exclusive or, ^ in C 
+// X0 = 0XF ^ 0Xab;
+MOV X0, #0xAB       
+EOR X0, X0, #0xF
+BL printX0          // this should produce 0x0B
+
+/*
+0X0F = 0000 1111
+0xAB = 1010 1011
+EOR  = 1010 0100 = 0xA4
+*/
+
 // ORR{S}    Xd, Xs, Operand2
+// This is the or, | in C 
+// X0 = 0XF | 0Xab;
+MOV X0, #0xAB       
+ORR X0, X0, #0xF
+BL printX0          // this should produce 0x0B
+
+/*
+0X0F = 0000 1111
+0xAB = 1010 1011
+ORR  = 1010 1111 = 0xAF
+*/
+
 // BIC{S}    Xd, Xs, Operand2 
+// This is the Bit Clear
+// This is very useful but can be confusting at first
+/*
+The idea is to clear any bits in X if Y is set to 1
+The Logic Table is this
+    X   Y   X bic Y
+    0   0   0       In this case leave the flag    
+    0   1   0       In this case clear the flag, but its already clear
+    1   0   1       In this case leave the flag
+    1   1   0       In this case clear the flag
+*/ 
+MOV X0, #0xAB       
+BIC X0, X0, #0xF
+BL printX0          // this should produce 0x0B
+
+/*
+0X0F = 0000 1111
+0xAB = 1010 1011
+BIC  = 0000 0100 = 0x04
+*/
+
+
+
+
 
 
 // Shifting
 // LSL   X1, X2, #1    // Logical shift left
+// Shift the bits left, replace any bits on the right side with 0
+// Note that in binary #0xAAAAAAAAAAAAAAAA is:
+// 1010 1010 1010 1010 1010 1010 1010 1010 1010 1010 1010 1010 1010 1010 1010 1010 
+// this makes it easy to see what is hapening when we shift
+MOV X0, #0xAAAAAAAAAAAAAAAA
+BL printX0          // for comparing the output
+LSL X0, X0, #4
+BL printX0          // this should produce 0xAAAAAAAAAAAAAA0
+
+PRINT NEW LINE ???
+
+
+
 // LSR   X1, X2, #1    // Logical shift right
+
+
 // ASR   X1, X2, #1    // Arithmetic shift right
+
+
 // ROR   X1, X2, #1    // Rotate right 
-
-
-
-
-
 
 
 
