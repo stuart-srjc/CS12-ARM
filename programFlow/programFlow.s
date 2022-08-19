@@ -264,7 +264,7 @@ BIC  = 0000 0100 = 0x04
 // Shift the bits left, replace any bits on the right side with 0
 // Note that in binary #0xAAAAAAAAAAAAAAAA is:
 // 1010 1010 1010 1010 1010 1010 1010 1010 1010 1010 1010 1010 1010 1010 1010 1010 
-// this makes it easy to see what is hapening when we shift
+// this makes it easy to see what is happening when we shift
 MOV X0, #0xAAAAAAAAAAAAAAAA
 BL printX0          // for comparing the output
 LSL X0, X0, #4
