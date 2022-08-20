@@ -110,14 +110,12 @@ The Logic Table is this
 
 
 
+/*****************************
 
+Take a screen shot of the resulting output
+Turn in the screen shot as well as the completed .s file 
 
-// Exit to the OS, essentially this code does this in c
-// return 0;
-mov x0, #0          // return value
-mov x8, #93         // Service call code
-svc 0               // Linux service call
-
+******************************/
 
 /* output should look like this
 
@@ -132,5 +130,14 @@ Hello World of Assembly!
 0x5555555555555555
 
 */
+
+
+
+// Exit to the OS, essentially this code does this in c
+// return 0;
+mov x0, #0          // return value
+mov x8, #93         // Service call code
+svc 0               // Linux service call
+
 
 

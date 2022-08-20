@@ -81,7 +81,6 @@ SBC X1, X1, X2     // Subtract X2 from X1 and put the result in X1, but allso de
 
 
 
-
 // Exit to the OS, essentially this code does this in c
 // return 0;
 mov x0, #0          // return value

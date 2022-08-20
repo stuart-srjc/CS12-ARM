@@ -1,0 +1,22 @@
+if [ $# -eq 1 ] && [ ! -d "../$1" ]
+then
+    echo creating ../$1
+    mkdir ../$1
+
+    echo creating $1.s
+    cp ./template.s ../$1/$1.s
+
+    echo copying Makefile
+    sed "s/template/$1/g" Makefile > ../$1/Makefile
+    cd ../$1
+    exec bash
+
+else
+    echo
+    echo usage:
+    echo ./createProject projectName
+    echo "    where projectName is the name of the directory to create"
+    echo "    and the projectName directory does not exist"
+    echo
+fi
+

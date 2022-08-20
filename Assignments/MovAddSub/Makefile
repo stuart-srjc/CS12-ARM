@@ -1,5 +1,5 @@
 MovAddSub: MovAddSub.o 
-	ld -o MovAddSub MovAddSub.o ../cs12Lib/cs12Lib.o
+	ld -o MovAddSub MovAddSub.o ../../lib/cs12Lib/cs12Lib.o
 
 MovAddSub.o: MovAddSub.s
 	as -g -o MovAddSub.o MovAddSub.s

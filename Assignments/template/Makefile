@@ -1,5 +1,5 @@
 template: template.o 
-	ld -o template template.o ../cs12Lib/cs12Lib.o
+	ld -o template template.o ../../lib/cs12Lib/cs12Lib.o
 
 template.o: template.s
 	as -g -o template.o template.s
