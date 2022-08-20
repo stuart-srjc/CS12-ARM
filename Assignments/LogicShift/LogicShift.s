@@ -28,7 +28,7 @@ svc 0                // Linux service call
 // And the values 0xAA  and 0x7
 // Print out the result
 
-
+// your code goes here
 
 
 
@@ -39,7 +39,7 @@ svc 0                // Linux service call
 // EOR the values 0xAA  and 0x7
 // Print out the result
 
-
+// your code goes here
 
 
 
@@ -51,7 +51,7 @@ svc 0                // Linux service call
 // OOR the values 0xAA  and 0x7
 // Print out the result
 
-
+// your code goes here
 
 
 
@@ -71,7 +71,7 @@ The Logic Table is this
 // BIC the values 0xAA  and 0x7
 // Print out the result
 
-
+// your code goes here
 
 
 
@@ -85,14 +85,14 @@ The Logic Table is this
 // LSL  the value 0xAAAAAAAAAAAAAAAA  by 7
 // Print out the result
 
-
+// your code goes here
 
 
 // LSR   X1, X2, #1    // Logical shift right
 // LSR  the value 0xAAAAAAAAAAAAAAAA  by 7
 // Print out the result
 
-
+// your code goes here
 
 
 
@@ -100,13 +100,15 @@ The Logic Table is this
 // ASR  the value 0xAAAAAAAAAAAAAAAA  by 7
 // Print out the result
 
-
+// your code goes here
 
 
 
 // ROR   X1, X2, #1    // Rotate right 
 // ROR  the value 0xAAAAAAAAAAAAAAAA  by 7
 // Print out the result
+
+// your code goes here
 
 
 
