@@ -108,6 +108,13 @@ bl printX0
 //ldr x2, =greetSize
 //bl printString
 
+mov x0, #10
+bl getRandomNumber
+bl printX0
+
+mov x0, #255
+bl getRandomNumber
+bl printX0
 
 //bl exit 
 bl exitNormal

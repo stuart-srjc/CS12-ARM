@@ -4,7 +4,7 @@ registerSize = .-registerString
 
 hex: .ascii "0x"
 hexSize = .-hex
-tempBytes: .word 0x0
+tempBytes: .quad 0x0
 
 .bss
 hexNumber: .skip 19
@@ -338,24 +338,19 @@ ret
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 getRandomNumber:
 //prologue
-push x1
-push x2
-push x3
-push x7
-push x11
 push lr
 
 add x11, sp, #0
 
 //preserve the address of the buffer
 // x3 will be from 0 to x3 -1, so we need to add 1
-mov x3, #0
-add x3, x0, #1
+mov x4, #0
+add x4, x0, #1
 
-ldr x0, =tempBytes
 
 //call random syscall
-mov x1, #4 	//bytes
+ldr x0, =tempBytes
+mov x1, #8 	//bytes
 mov x2, #0 	//flags
 mov x8, #0x116	//random
 svc #0 		// software interupt
@@ -364,19 +359,14 @@ svc #0 		// software interupt
 ldr x0, =tempBytes
 ldr x0, [x0]
 
-// set the divisor
-mov x1, x3
-udiv x2, x1, x3
-msub x0, x2, x3, x1 
+// modulus by the number given
+udiv x1, x0, x4         // Modulus
+msub x1, x1, x4, x0     // Modulus step 2
+mov x0, x1
 
 //epilog
 sub sp, x11, #0
 pop lr
-pop x11
-pop x7
-pop x3
-pop x2
-pop x1
 ret
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
