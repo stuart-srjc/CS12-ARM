@@ -58,12 +58,12 @@ bl printX0      // should be 0x1, the missing 1 from our above calculation
 // we used the signed version of MULH there is an unsinged version as well, lets take a look at both of them using a value 0xF000000000000000 and multiplying that by 0x10
 
 
-MOV X0, 0xF000000000000000      // X0 = 0x10000000000000000
+MOV X0, 0xF000000000000000      // X0 = 0xF0000000000000000
 MOV X1, 0x10      // X1 = 0x10
 SMULH X0, X0, X1  // x0=x0*x1
 bl printX0      // we will take a look at the value after the next operations 
 
-MOV X0, 0xF000000000000000      // X0 = 0x10000000000000000
+MOV X0, 0xF000000000000000      // X0 = 0xF0000000000000000
 MOV X1, 0x10      // X1 = 0x10
 UMULH X0, X0, X1  // x0=x0*x1
 bl printX0      
