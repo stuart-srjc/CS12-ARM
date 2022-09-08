@@ -94,7 +94,7 @@ svc 0                // Linux service call
 mov x0, 0 // set x0 to 0 to watch it change
 // Walk through the array byte by byte 
 // Set a break point for the line below this, note the value of x0
-// b 60 (This is an example the actual line number may be different)
+// b 100 (This is an example the actual line number may be different)
 // run
 // info register x0
 ldr x0, =byteArray
