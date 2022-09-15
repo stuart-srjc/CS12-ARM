@@ -73,12 +73,12 @@ The Logic Table is this
 */ 
 MOV X0, #0xAB       
 BIC X0, X0, #0xF
-BL printX0          // this should produce 0x0B
+BL printX0          // this should produce 0xA0
 
 /*
-0X0F = 0000 1111
 0xAB = 1010 1011
-BIC  = 0000 0100 = 0x04
+0X0F = 0000 1111
+BIC  = 1010 0000 = 0xA0
 */
 
 

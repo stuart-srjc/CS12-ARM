@@ -59,16 +59,16 @@ SUB X1, X1, X1      // X1-=X1; should be 0
 
 
 // SBC
-// Subtract with carry requires we use the Status bit flag, and it will subtract a 1 if a borrow is needed (carry flag set)
+// Subtract with carry requires we use the Status bit flag, and it will subtract a 1 if a borrow is needed (carry flag is not set)
 MOV X0, #2          // X0=2;
 MOV X1, #1          // x1=1;
 MOV X2, #0 
 SUBS X0, X0, #1     // X0--;  there is a 1 in X0 now and the Carry flag is set, because there was no borrow needed
-SBC X1, X1, X2     // Subtract X2 from X1 and put the result in X1, but allso decrement if the carry flag is clear
+SBC X1, X1, X2     // Subtract X2 from X1 and put the result in X1, but also decrement if the carry flag is clear
 SUBS X0, X0, #1     // X0--;  there is a 0 in X0 now and the Carry flag is set, because there was no borrow needed
-SBC X1, X1, X2     // Subtract X2 from X1 and put the result in X1, but allso decrement if the carry flag is clear
+SBC X1, X1, X2     // Subtract X2 from X1 and put the result in X1, but also decrement if the carry flag is clear
 SUBS X0, X0, #1     // X0--;  there is a -1 (0xFFFFFFFFFFFFFFFF) in X0 now and the Carry flag is cleared, because there was a borrow needed
-SBC X1, X1, X2     // Subtract X2 from X1 and put the result in X1, but allso decrement if the carry flag is clear
+SBC X1, X1, X2     // Subtract X2 from X1 and put the result in X1, but also decrement if the carry flag is clear
 
 
 
