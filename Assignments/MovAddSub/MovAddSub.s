@@ -34,6 +34,7 @@ svc 0                // Linux service call
 // Using MOV/MOVK set the value of X2 to 0xFACED000000DECAF
 // Then using the library call printX2 print the value to the screen
 
+// your code goes here
 
 // MOVK
 // We want to put the value 0x123456789ABCDEF0 in register 1
@@ -145,6 +146,7 @@ BL printX1
 
 /*
 Hello World of Assembly!
+0xFACED000000DECAF
 0x123456789ABCDEF0
 0xFFFFFFFFFFFFFACE
 0x123456789ABCD9BE
