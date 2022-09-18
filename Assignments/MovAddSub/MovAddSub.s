@@ -54,7 +54,7 @@ BL printX1
 
 
 // MOVN
-// move the 1ʻs complement of the value 0x0531 into X3
+// move the 1ʻs complement of the value 0x0531 into X2
 // then print the value to the screen
 
 // your code goes here
