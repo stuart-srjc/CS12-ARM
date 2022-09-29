@@ -175,8 +175,6 @@ B.NE QuadLoop4
 
 // Now display the values 
 
-// and now we see the 0-4 values, vs the values 1-5
-
 MOV X2, #0
 LDR X0, =myQuadArray
 QuadLoop5:
@@ -187,30 +185,29 @@ BL printX1
 ADD X2, X2, #1          // were still using X2 for the for loop
 CMP X2, 5               // for 0 to 4
 B.NE QuadLoop5
-// and now we see the 0-4 values, vs the values 1-5
 
 BL printEndl
 
 
 // There are also forms of the LDR and STR that do two registers at the same time
-LDR X0, =myOcta
-LDP X1, X2, [X0]
-BL printX1
-BL printX2
+LDR X0, =myOcta         // load the address of the octa variable
+LDP X1, X2, [X0]        // load the octa variable into X1 and X2 registers
+BL printX1              // print out X1
+BL printX2              // print out X2
 
 BL printEndl
 
-LDR X0, =myOcta
-MOV X1, 0X1
-MOV X2, 0X2
+LDR X0, =myOcta         // load the address of the octa variable
+MOV X1, 0X1             // mov 1 into X1
+MOV X2, 0X2             // mov 2 into X2
 
-STP X1, X2, [X0]
+STP X1, X2, [X0]        // Store X1 and X2 into the octa variable
 
 // now lets print this out
-LDR X0, =myOcta
-LDP X1, X2, [X0]
-BL printX1
-BL printX2
+LDR X0, =myOcta         // load the address of the octa variable 
+LDP X1, X2, [X0]        // load the octa variable into X1 and X2 registers
+BL printX1              // print out X1
+BL printX2              // print out X2
 
 BL printEndl
 
