@@ -21,10 +21,14 @@ myArray:     .fill      10, 4, 0xA          // 10 words
 myByteArray: .rept      5                   // 5 bytes
     .byte 0xF
 .endr
+.align
 myQuadArray: .rept      5                   // 5 Quadwords
     .quad 0x1234567890ABCDEF
 .endr
-
+.align
+myQuadArray2: .rept      5                   // 5 Quadwords
+    .quad 0xF
+.endr
 
 .text  // start o the text segment (Code)
 
@@ -81,7 +85,6 @@ BL printEndl
 
 // That is better 
 // we now get just the byte
-
 // LDR with offset
 // Letʻs take a look at the Byte Array created with .rept
 LDR X0, =myByteArray
@@ -125,7 +128,7 @@ MOV X2, #0
 LDR X0, =myQuadArray
 QuadLoop2:
                         // The X3 is gone and in fact were not using a counter in the LDR
-LDR X1, [X0, #8]!       // we offset the byte by 8 bytes, the ! causes X1 to retain this address
+LDR X1, [X0, #8]!       // we offset the byte by 8 bytes, the ! causes X0 to retain this address
 BL printX1
                         // So that the next time through we get the next value
 ADD X2, X2, #1          // were still using X2 for the for loop
@@ -138,9 +141,9 @@ BL printEndl
 // We are using Pre_indexed addressng, this is similar to ++X in C
 // Because were indexing before we do the read we are reading from 1-5 vs 0-4
 // That is why we see 
-// 0x3837363534333033
+// 0x000000000000000F
 // instead of 
-// 0x3034567890ABCDEF
+// 0x1234567890ABCDEF
 // this is the value that is one Quadword after our array
 // So how do we get the right data? 
 
