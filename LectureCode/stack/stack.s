@@ -111,6 +111,14 @@ MOV X1, #0
 STR X1, [SP, #-16]!     // push on the stack
 b loopForever
 
+/*
+What Is Segmentation Fault? In a nutshell, segmentation fault refers to errors due to a process's attempts to access memory regions that it shouldn't. When the kernel detects odd memory access behaviors, it terminates the process issuing a segmentation violation signal (SIGSEGV)
+
+(https://www.baeldung.com/linux/segmentation-fault)
+*/
+
+
+
 // Exit to the OS, essentially this code does this in c
 // return 0;
 mov x0, #0          // return value
