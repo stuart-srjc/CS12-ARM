@@ -19,17 +19,28 @@ svc 0
 MOV X12, #0
 LDR X15, =\deck          // point to the deck
 BL printX15
-//nextCard:
-1:
+//nextCard:               // original label
+1:                      // because we cannot use the same label twice, unless it is numeric
 STRB W12, [X15], #1     //Store the value of the counter into the deck and increment the deck by 1
 BL printX12
 ADD X12, X12, #1        // Increment the counter
 CMP X12, #51            // 0 to 51 is our card set
-//B.LE nextCard
-B.LE 1b
+//B.LE nextCard           // original branch to the label
+B.LE 1b                 // branch to the next label 1 in the backward direction 
 .ENDM
   
+// print a cards value without a new line
+.MACRO printCardValue cardNumber
+// first we need to get the modulus of the cardNumber
+MOV X0, \cardNumber
+MOV X1, #13
+UDIV X2, X0, X1         // x16=cardNumber/13
+MSUB X0, X2, X1, X0     // X15=x15-(x15*x) 
+BL printX0   
 
+Not Quite right here
+
+.ENDM
 
 
 .data  // start of the data segment
@@ -98,6 +109,15 @@ endl
 
 newDeck deck1 
 newDeck deck2 
+
+MOV X12, #13
+nextCardPrint:
+printCardValue X12
+ADD X12, X12, #1          // Increment X2
+CMP X12, #30             // Stop at 30
+B.LE nextCardPrint
+
+
 
 
 // Exit to the OS, essentially this code does this in c

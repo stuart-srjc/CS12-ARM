@@ -7,4 +7,5 @@ macros.o: macros.s
 clean:
 	rm -rf macros
 	rm -rf macros.o
+	rm -rf listing 
 
