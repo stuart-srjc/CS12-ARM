@@ -35,6 +35,24 @@ mov x0, #0xabc
 lsl x0, x0, #16
 mov x1, #0xabc1
 mov x2, #0xabc2
+*/
+mov x0, #1
+mov x1, #1
+mov x2, #1
+mov x3, #1
+mov x4, #1
+mov x5, #1
+mov x6, #1
+mov x7, #1
+mov x8, #1
+mov x9, #1
+mov x10, #1
+mov x11, #1
+mov x12, #1
+mov x13, #1
+mov x14, #1
+mov x15, #1
+
 bl printX0
 bl printX1
 bl printX2
@@ -51,7 +69,7 @@ bl printX12
 bl printX13
 bl printX14
 bl printX15 
-
+/*
 //test RandomNumber
 ldr x1, =rand
 ldr x2, =randSize
@@ -115,6 +133,10 @@ bl printX0
 mov x0, #255
 bl getRandomNumber
 bl printX0
+
+mov x11, #11
+bl printX11
+bl printX11
 
 //bl exit 
 bl exitNormal

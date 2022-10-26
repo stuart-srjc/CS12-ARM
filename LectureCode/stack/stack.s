@@ -17,7 +17,7 @@ output:
 	.fill 21, 1, 0x0 // 21 bytes initialized to 0
 outputSize = .-output
 
-.text  // start o the text segment (Code)
+.text  // start of the text segment (Code)
 
 .global _start // Linux Standard _start, similar to main in C/C++ 
 _start:
