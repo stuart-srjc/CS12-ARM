@@ -141,26 +141,30 @@ macroSize = .-macro
 endline: 
 	.asciz "\n"
 endlineSize = .-endline
+
 /*
 There are 52 cards in a standard playing deck (discarding the jokers)
 4 suits with 13 cards each
 Hearts, Diamonds, Clubs and Spades
-This means we can represent the value and suit of a card in 52 bits of data
-0 through 51 
-the most convienent data type is likely a byte per card
-So to represent a deck of cards we will need 52 bytes
+This means we can represent the value and suit of a card in one byte of data
+0 through 51 
+the data types we will use to define the cards will be
+A byte to represent the deck of cards itself
+2 Arrays to present the data to the user
+Using the byte we will use the numbers between 0 and 51 to represent the deck
 to determine the suit of the card we will use Div 13
 to determine the value of the card we will use Mod 13
 example the 4 of Spades would come after all hearts, Diamonds and Clubs
-Hearts      A23456789TJQK
-Diamonds    A23456789TJQK
-Clubs       A23456789TJQK
-Spades      A234
+Hearts      A23456789TJQK
+Diamonds    A23456789TJQK
+Clubs       A23456789TJQK
+Spades      A23456789TJQK
 it is the 43rd card in the deck
 43 divided by 13 = 3
 43 Mod 13 = 4
 if we represent the cards as shown below
 */
+
 suits: .ascii "HDCS"            // The deck has 4 suites Hearts, Diamonds, Clubs and Spades
 values: .ascii "A23456789TJQK"  // The deck has 13 cards A=1 for this assignment T=10 Jack, Queen and King 
 /*
