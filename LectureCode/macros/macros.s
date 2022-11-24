@@ -193,10 +193,13 @@ ldr x2, =macroSize   // store the size of the macro string into x2
 mov x8, #64          // store 64 to x8, this is the linux write call
 svc 0                // Linux service call
 
+
+// test mulby4 with X2 set to 5
 MOV X2, #5
 mulby4 X2
 BL printX2
 endl
+BL printX2 // note that the endl did not change the value here 
 
 newDeck deck1 
 endl 
