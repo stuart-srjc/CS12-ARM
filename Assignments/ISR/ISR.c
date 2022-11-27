@@ -1,20 +1,39 @@
-#include <linux/init.h>
-#include <linux/module.h>
-#include <linux/interrupt.h>
-#include <linux/gpio.h>
+// Include the files needed for:
+#include <linux/init.h>         // KLM
+#include <linux/module.h>       // KLM
+#include <linux/interrupt.h>    // Interrupts
+#include <linux/gpio.h>         // GPIO
 
 #define GPIO_20 20 // pin 38
 
-MODULE_LICENSE("GPL");
+MODULE_LICENSE("GPL");          // licenses are ... complicated, let us just use GPL
 
-char device[] = "ISR_Test";
+char device[] = "ISR_Test";     // create a string, not terminated by zero
 
+/* gpio_isr 
+ *  parameters:     irq, the irq that triggered this interupt service routine
+ *                  dev_id void pointer to the device id of the device that triggered the interrupt 
+ *  Preconditions:  An irq has been triggered, and valid values are in irq and dev_id
+ *  Postconditions: the message "KLM: Interupt Handled." has been printed to /var/log/syslog
+ *  Return:         IRQ_HANDLED, informing the OS that the interupt has been handled
+ */
 static irqreturn_t gpio_isr(int irq,void *dev_id) {
-    printk(KERN_INFO "KLM: Interupt Hanled.");
+    printk(KERN_INFO "KLM: Interupt Handled.");
     return IRQ_HANDLED;
     }
 
-
+/*  isr_init
+ *  parameters:     None 
+ *  Preconditions:  The KLM has been requested to load
+ *  Postconditions: The GPIO Pin is:
+ *                      tested for validity
+ *                      requested for use
+ *                      configured as input
+ *                      debounce is set to 200 
+ *                  The IRQ is requested                  
+ *                  Appropriate messages have been loged for success of failure
+ *  Return:         void
+ */
 static int __init isr_init(void){   
     int ret = 0;
     int irq = 0;
@@ -73,9 +92,14 @@ end:
 
     
 }
-
-
-
+    
+/* isr_exit 
+ *  parameters:     None 
+ *  Preconditions:  
+ *  Postconditions: IRQ is freed 
+ *                  GPIO if freed
+ *  Return:         void 
+ */
 static void __exit isr_exit(void){
     int irq=0;
     printk(KERN_INFO "KLM: stopping...");
@@ -88,6 +112,6 @@ static void __exit isr_exit(void){
 }
 
 
-
+// Register the Init and Exit routintes for the KLM
 module_init(isr_init);
 module_exit(isr_exit);
