@@ -167,12 +167,9 @@ push x0
 push x11
 push lr
 
-add x11, sp, #0
-
 bl printRegister
 
 //epilog
-sub sp, x11, #0
 pop lr 
 pop x11
 pop x0
@@ -284,8 +281,6 @@ printRegister:
 pushGP
 push lr
 
-add x11, sp, #0
-
 //body
 mov x4, #0
 mov x3, #15
@@ -326,7 +321,6 @@ mov x2, #17 //number of characters plus newline
 bl printString
 
 //epilog
-sub sp, x11, #0
 pop lr
 popGP
 ret
@@ -337,8 +331,6 @@ ret
 getRandomNumber:
 //prologue
 push lr
-
-add x11, sp, #0
 
 //preserve the address of the buffer
 // x3 will be from 0 to x3 -1, so we need to add 1
@@ -363,7 +355,6 @@ msub x1, x1, x4, x0     // Modulus step 2
 mov x0, x1
 
 //epilog
-sub sp, x11, #0
 pop lr
 ret
 
@@ -374,7 +365,6 @@ printString:
 //prologue
 push x11
 push lr
-add x11, sp, #0
 
 //body
 mov x0, #1 	// stdout
@@ -382,7 +372,6 @@ mov x8, #64	// write syscall
 svc #0 		// software interupt
 
 //epilog
-sub sp, x11, #0
 pop lr
 pop x11
 ret
@@ -394,7 +383,6 @@ getString:
 //prologue
 push x11
 push lr
-add x11, sp, #0
 
 //body
 mov x0, #1 	// stdin
@@ -402,7 +390,6 @@ mov x8, #63 	// read syscall
 svc #0 		// software interupt
 
 //epilog
-sub sp, x11, #0
 pop lr
 pop x11
 ret
@@ -420,7 +407,6 @@ push x5     // Counter
 push x8     // Counter 
 push x11  
 push lr
-add x11, sp, #0
 
 //body
 ldr x1, =hexNumber
@@ -493,7 +479,6 @@ getHexNumberEnd:
 
 
 //epilog
-sub sp, x11, #0
 pop lr
 pop x11
 pop x8
