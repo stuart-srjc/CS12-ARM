@@ -31,13 +31,11 @@ hexNumber: .skip 19
 	push x0
 	push x11
 	push lr
-	add x11, sp, #0
 
 	mov x0, \register 
 	bl printRegister
 
 	//epilog
-	sub sp, x11, #0
 	pop lr 
 	pop x11
 	pop x0

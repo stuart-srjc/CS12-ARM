@@ -37,21 +37,21 @@ mov x1, #0xabc1
 mov x2, #0xabc2
 */
 mov x0, #1
-mov x1, #1
-mov x2, #1
-mov x3, #1
-mov x4, #1
-mov x5, #1
-mov x6, #1
-mov x7, #1
-mov x8, #1
-mov x9, #1
-mov x10, #1
-mov x11, #1
-mov x12, #1
-mov x13, #1
-mov x14, #1
-mov x15, #1
+mov x1, #2
+mov x2, #3
+mov x3, #4
+mov x4, #5
+mov x5, #6
+mov x6, #7
+mov x7, #8
+mov x8, #9
+mov x9, #10
+mov x10, #11
+mov x11, #12
+mov x12, #13
+mov x13, #14
+mov x14, #15
+mov x15, #16
 
 bl printX0
 bl printX1
