@@ -53,7 +53,7 @@ svc 0                // Linux service call
 
 // get a string from the user
 // cin << varName;
-mov x0, #1            // 1 is STDOUT/STDIN
+mov x0, #1            // 1 stdin 
 ldr x1, =input       // store the address of the input array into x1
 ldr x2, =inputSize   // store the size of the input array string into x2
 mov x8, #63          // store 63 to x8, this is the linux read call
@@ -61,7 +61,7 @@ svc 0                // Linux service call
 
 
 // Echo back to the user the input value
-mov x0, #1            // 1 is STDOUT/STDIN
+mov x0, #0            // 0 stdout
 ldr x1, =input       // store the address of the input array into x1
 ldr x2, =inputSize   // store the size of the input array string into x2
 mov x8, #64          // store 64 to x8, this is the linux write call
@@ -94,7 +94,7 @@ MOV X1, 0xA             // we will need a new line also
 STRB W1, [X0], #16      // write to the output array our new line 
 
 // Echo back to the user the input value
-mov x0, #1            // 1 is STDOUT/STDIN
+mov x0, #0            // stdout
 ldr x1, =output       // store the address of the input array into x1
 
 // NOTE that X2 currently holds the value of all the characters except 0xA
