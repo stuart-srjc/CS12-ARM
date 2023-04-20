@@ -330,6 +330,7 @@ ret
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 getRandomNumber:
 //prologue
+pushGP
 push lr
 
 //preserve the address of the buffer
@@ -356,6 +357,7 @@ mov x0, x1
 
 //epilog
 pop lr
+popGP
 ret
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

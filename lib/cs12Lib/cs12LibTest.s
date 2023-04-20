@@ -77,8 +77,10 @@ bl printString
 
 ldr x1, randMaxAddr
 mov x0, #1000
+mov x1, #0x1000
 bl getRandomNumber
 bl printX0
+bl printX1
 
 mov x0, #100
 bl getRandomNumber
@@ -131,8 +133,11 @@ bl getRandomNumber
 bl printX0
 
 mov x0, #255
+mov x1, #255
+
 bl getRandomNumber
 bl printX0
+bl printX1
 
 mov x11, #11
 bl printX11
